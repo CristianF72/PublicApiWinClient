@@ -45,6 +45,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.sumaDeConvertit = new System.Windows.Forms.NumericUpDown();
             this.valoareDupaConversie = new System.Windows.Forms.NumericUpDown();
+            this.textUserName = new System.Windows.Forms.TextBox();
+            this.textPassword = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sumaDeConvertit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valoareDupaConversie)).BeginInit();
             this.SuspendLayout();
@@ -61,11 +67,11 @@
             this.textResponseAPI.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textResponseAPI.Location = new System.Drawing.Point(113, 83);
+            this.textResponseAPI.Location = new System.Drawing.Point(79, 162);
             this.textResponseAPI.Multiline = true;
             this.textResponseAPI.Name = "textResponseAPI";
             this.textResponseAPI.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textResponseAPI.Size = new System.Drawing.Size(622, 162);
+            this.textResponseAPI.Size = new System.Drawing.Size(656, 162);
             this.textResponseAPI.TabIndex = 1;
             // 
             // cmdExecuta
@@ -90,7 +96,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 82);
+            this.label2.Location = new System.Drawing.Point(21, 165);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 13);
             this.label2.TabIndex = 4;
@@ -98,7 +104,7 @@
             // 
             // cmdDeserializare
             // 
-            this.cmdDeserializare.Location = new System.Drawing.Point(24, 252);
+            this.cmdDeserializare.Location = new System.Drawing.Point(23, 330);
             this.cmdDeserializare.Name = "cmdDeserializare";
             this.cmdDeserializare.Size = new System.Drawing.Size(75, 23);
             this.cmdDeserializare.TabIndex = 5;
@@ -108,7 +114,7 @@
             // 
             // cmdClearDebug
             // 
-            this.cmdClearDebug.Location = new System.Drawing.Point(113, 252);
+            this.cmdClearDebug.Location = new System.Drawing.Point(104, 330);
             this.cmdClearDebug.Name = "cmdClearDebug";
             this.cmdClearDebug.Size = new System.Drawing.Size(75, 23);
             this.cmdClearDebug.TabIndex = 6;
@@ -121,11 +127,11 @@
             this.textDebugOuput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textDebugOuput.Location = new System.Drawing.Point(23, 281);
+            this.textDebugOuput.Location = new System.Drawing.Point(23, 359);
             this.textDebugOuput.Multiline = true;
             this.textDebugOuput.Name = "textDebugOuput";
             this.textDebugOuput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textDebugOuput.Size = new System.Drawing.Size(712, 214);
+            this.textDebugOuput.Size = new System.Drawing.Size(712, 136);
             this.textDebugOuput.TabIndex = 7;
             // 
             // label3
@@ -193,6 +199,7 @@
             // 
             // sumaDeConvertit
             // 
+            this.sumaDeConvertit.DecimalPlaces = 6;
             this.sumaDeConvertit.Location = new System.Drawing.Point(43, 538);
             this.sumaDeConvertit.Name = "sumaDeConvertit";
             this.sumaDeConvertit.Size = new System.Drawing.Size(75, 20);
@@ -200,16 +207,73 @@
             // 
             // valoareDupaConversie
             // 
+            this.valoareDupaConversie.DecimalPlaces = 6;
             this.valoareDupaConversie.Location = new System.Drawing.Point(663, 538);
             this.valoareDupaConversie.Name = "valoareDupaConversie";
             this.valoareDupaConversie.Size = new System.Drawing.Size(75, 20);
             this.valoareDupaConversie.TabIndex = 18;
+            // 
+            // textUserName
+            // 
+            this.textUserName.Location = new System.Drawing.Point(113, 76);
+            this.textUserName.Name = "textUserName";
+            this.textUserName.Size = new System.Drawing.Size(100, 20);
+            this.textUserName.TabIndex = 19;
+            // 
+            // textPassword
+            // 
+            this.textPassword.Location = new System.Drawing.Point(313, 76);
+            this.textPassword.Name = "textPassword";
+            this.textPassword.Size = new System.Drawing.Size(145, 20);
+            this.textPassword.TabIndex = 20;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Location = new System.Drawing.Point(113, 111);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(156, 45);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Auth Type";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Location = new System.Drawing.Point(313, 111);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(156, 45);
+            this.groupBox2.TabIndex = 22;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Technique";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(251, 78);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(56, 13);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Password:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(40, 78);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(63, 13);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "User Name:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 606);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.textPassword);
+            this.Controls.Add(this.textUserName);
             this.Controls.Add(this.valoareDupaConversie);
             this.Controls.Add(this.sumaDeConvertit);
             this.Controls.Add(this.label6);
@@ -255,6 +319,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown sumaDeConvertit;
         private System.Windows.Forms.NumericUpDown valoareDupaConversie;
+        private System.Windows.Forms.TextBox textUserName;
+        private System.Windows.Forms.TextBox textPassword;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
 
