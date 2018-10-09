@@ -69,9 +69,10 @@ namespace PublicApiWinClient
         
         private dynamic deserialiseJSON(string strJSON)
         {
-            //try
-            //{
-                var jsonConvertorValutar = JsonConvert.DeserializeObject<dynamic>(strJSON);
+            dynamic jsonConvertorValutar = null;
+            try
+            {
+                jsonConvertorValutar = JsonConvert.DeserializeObject<dynamic>(strJSON);
 
                 //debugDeserializeOutput("Obiectul JSON: " + jsonConvertorValutar.ToString());
 
@@ -84,11 +85,11 @@ namespace PublicApiWinClient
                 debugDeserializeOutput("Rata de schimb pentru lire sterlin(g)e este: " + jsonConvertorValutar.rates.GBP);
 
                 debugDeserializeOutput("Rata de schimb pentru lei românești este: " + jsonConvertorValutar.rates.RON);
-            //}
-            //catch (Exception e)
-            //{
-            //    debugDeserializeOutput("Eroare la deserializare: " + e.Message.ToString());
-            //}
+            }
+            catch (Exception e)
+            {
+                debugDeserializeOutput("Eroare la deserializare: " + e.Message.ToString());
+            }
             return jsonConvertorValutar;
         }
 
@@ -127,7 +128,6 @@ namespace PublicApiWinClient
 
 
 
-
         #endregion
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -138,104 +138,149 @@ namespace PublicApiWinClient
         private void conversieButton(object sender, EventArgs e)
         {
             string tipModedaDeConvertit = comboBox1.SelectedItem.ToString();
+
             string tipModedaInConvertit = comboBox2.SelectedItem.ToString();
 
+            switch (tipModedaDeConvertit)
+            {
+                case "EUR":
+                    conversieEur();
+                break;
+
+                case "CZK":
+                    conversieCzk();
+                break;
+                case "GBP":
+                    conversieGbp();
+                break;
+                case "RON":
+                    conversieRon();
+                break;
+            }
+        }
+
+
+        
+        public decimal conversieEur()
+        {
+            string tipModedaInConvertit = comboBox2.SelectedItem.ToString();
             var czk = (decimal)deserialiseJSON(textResponseAPI.Text).rates.CZK;
             var gbp = (decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP;
             var ron = (decimal)deserialiseJSON(textResponseAPI.Text).rates.RON;
             var eur = (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR;
 
-            switch (tipModedaDeConvertit)
+            switch (tipModedaInConvertit)
             {
                 case "EUR":
-                    switch (tipModedaInConvertit)
-                    {
-                        case "EUR":
-                            valoareDupaConversie.Value = sumaDeConvertit.Value;
-                        break;
-
-                        case "CZK":
-                            valoareDupaConversie.Value = sumaDeConvertit.Value * czk;
-                        break;
-
-                        case "GBP":
-                            valoareDupaConversie.Value = sumaDeConvertit.Value * gbp;
-                        break;
-
-                        case "RON":
-                            valoareDupaConversie.Value = sumaDeConvertit.Value * ron;
-                        break;
-                    }
-                break;
-
+                    valoareDupaConversie.Value = sumaDeConvertit.Value;
+                    break;
 
                 case "CZK":
-                    switch (tipModedaInConvertit)
-                    {
-                        case "EUR":
-                            valoareDupaConversie.Value = sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.CZK;
-                        break;
-
-                        case "CZK":
-                            valoareDupaConversie.Value = sumaDeConvertit.Value;
-                        break;
-
-                        case "GBP":
-                            valoareDupaConversie.Value = (sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.CZK ) * 
-                                                         ((decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP / (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR);
-                        break;
-
-                        case "RON":
-                            valoareDupaConversie.Value = (sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.CZK) *
-                                                         ((decimal)deserialiseJSON(textResponseAPI.Text).rates.RON / (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR);
-                            break;
-                    }
+                    valoareDupaConversie.Value = sumaDeConvertit.Value * czk;
                     break;
+
                 case "GBP":
-                    switch (tipModedaInConvertit)
-                    {
-                        case "EUR":
-                            valoareDupaConversie.Value = sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP;
-                            break;
-
-                        case "GBP":
-                            valoareDupaConversie.Value = sumaDeConvertit.Value;
-                            break;
-
-                        case "CZK":
-                            valoareDupaConversie.Value = (sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP) *
-                                                         ((decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP / (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR);
-                            break;
-
-                        case "RON":
-                            valoareDupaConversie.Value = (sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP) *
-                                                         ((decimal)deserialiseJSON(textResponseAPI.Text).rates.RON / (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR);
-                            break;
-                    }
+                    valoareDupaConversie.Value = sumaDeConvertit.Value * gbp;
                     break;
+
                 case "RON":
-                    switch (tipModedaInConvertit)
-                    {
-                        case "EUR":
-                            valoareDupaConversie.Value = sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.RON;
-                            break;
-
-                        case "RON":
-                            valoareDupaConversie.Value = sumaDeConvertit.Value;
-                            break;
-
-                        case "CZK":
-                            valoareDupaConversie.Value = (sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.RON) *
-                                                         ((decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP / (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR);
-                            break;
-
-                        case "GBP":
-                            valoareDupaConversie.Value = (sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.RON) *
-                                                         ((decimal)deserialiseJSON(textResponseAPI.Text).rates.RON / (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR);
-                            break;
-                    }
+                    valoareDupaConversie.Value = sumaDeConvertit.Value * ron;
                     break;
             }
+            return valoareDupaConversie.Value;
+        }
+
+        public decimal conversieCzk()
+        {
+            string tipModedaInConvertit = comboBox2.SelectedItem.ToString();
+            var czk = (decimal)deserialiseJSON(textResponseAPI.Text).rates.CZK;
+            var gbp = (decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP;
+            var ron = (decimal)deserialiseJSON(textResponseAPI.Text).rates.RON;
+            var eur = (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR;
+
+            switch (tipModedaInConvertit)
+            {
+                case "EUR":
+                    valoareDupaConversie.Value = sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.CZK;
+                    break;
+
+                case "CZK":
+                    valoareDupaConversie.Value = sumaDeConvertit.Value;
+                    break;
+
+                case "GBP":
+                    valoareDupaConversie.Value = (sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.CZK) *
+                                                 ((decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP / (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR);
+                    break;
+
+                case "RON":
+                    valoareDupaConversie.Value = (sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.CZK) *
+                                                 ((decimal)deserialiseJSON(textResponseAPI.Text).rates.RON / (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR);
+                    break;
+            }
+            return valoareDupaConversie.Value;
+        }
+
+        public decimal conversieGbp()
+        {
+            string tipModedaInConvertit = comboBox2.SelectedItem.ToString();
+            var czk = (decimal)deserialiseJSON(textResponseAPI.Text).rates.CZK;
+            var gbp = (decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP;
+            var ron = (decimal)deserialiseJSON(textResponseAPI.Text).rates.RON;
+            var eur = (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR;
+
+            switch (tipModedaInConvertit)
+            {
+                case "EUR":
+                    valoareDupaConversie.Value = sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP;
+                    break;
+
+                case "GBP":
+                    valoareDupaConversie.Value = sumaDeConvertit.Value;
+                    break;
+
+                case "CZK":
+                    valoareDupaConversie.Value = (sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP) *
+                                                 ((decimal)deserialiseJSON(textResponseAPI.Text).rates.CZK / (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR);
+                    break;
+
+                case "RON":
+                    valoareDupaConversie.Value = (sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP) *
+                                                 ((decimal)deserialiseJSON(textResponseAPI.Text).rates.RON / (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR);
+                    break;
+            }
+            return valoareDupaConversie.Value;
+        }
+
+        public decimal conversieRon()
+        {
+            string tipModedaInConvertit = comboBox2.SelectedItem.ToString();
+            var czk = (decimal)deserialiseJSON(textResponseAPI.Text).rates.CZK;
+            var gbp = (decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP;
+            var ron = (decimal)deserialiseJSON(textResponseAPI.Text).rates.RON;
+            var eur = (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR;
+
+            switch (tipModedaInConvertit)
+            {
+                case "EUR":
+                    valoareDupaConversie.Value = sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.RON;
+                    break;
+
+                case "RON":
+                    valoareDupaConversie.Value = sumaDeConvertit.Value;
+                    break;
+
+                case "CZK":
+                    valoareDupaConversie.Value = (sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.RON) *
+                                                 ((decimal)deserialiseJSON(textResponseAPI.Text).rates.GBP / (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR);
+                    break;
+
+                case "GBP":
+                    valoareDupaConversie.Value = (sumaDeConvertit.Value / (decimal)deserialiseJSON(textResponseAPI.Text).rates.RON) *
+                                                 ((decimal)deserialiseJSON(textResponseAPI.Text).rates.RON / (decimal)deserialiseJSON(textResponseAPI.Text).rates.EUR);
+                    break;
+            }
+            return valoareDupaConversie.Value;
         }
     }
 }
