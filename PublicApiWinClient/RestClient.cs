@@ -20,8 +20,8 @@ namespace PublicApiWinClient
     {
         public string endPoint { get; set; }
         public httpVerb httpMethod { get; set; }
-        public string userName { get; set; }
-        public string userPassword { get; set; }
+        //public string userName { get; set; }
+        //public string userPassword { get; set; }
 
         public RestClient()
         {
@@ -37,7 +37,7 @@ namespace PublicApiWinClient
 
             request.Method = httpMethod.ToString();
 
-            String authHeader = System.Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(userName + ":" + userPassword));
+            //String authHeader = System.Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(userName + ":" + userPassword));
            
 
             HttpWebResponse response = null;

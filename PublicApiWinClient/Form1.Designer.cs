@@ -29,21 +29,18 @@
         private void InitializeComponent()
         {
             this.textURI = new System.Windows.Forms.TextBox();
-            this.textResponseAPI = new System.Windows.Forms.TextBox();
             this.cmdExecuta = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmdDeserializare = new System.Windows.Forms.Button();
             this.cmdClearDebug = new System.Windows.Forms.Button();
-            this.textDebugOuput = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.converteste = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.sumaDeConvertit = new System.Windows.Forms.NumericUpDown();
+            this.valueForConversion = new System.Windows.Forms.NumericUpDown();
             this.valoareDupaConversie = new System.Windows.Forms.NumericUpDown();
             this.textUserName = new System.Windows.Forms.TextBox();
             this.textPassword = new System.Windows.Forms.TextBox();
@@ -51,7 +48,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.sumaDeConvertit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valueForConversion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.valoareDupaConversie)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,18 +59,6 @@
             this.textURI.Size = new System.Drawing.Size(404, 20);
             this.textURI.TabIndex = 0;
             // 
-            // textResponseAPI
-            // 
-            this.textResponseAPI.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textResponseAPI.Location = new System.Drawing.Point(79, 162);
-            this.textResponseAPI.Multiline = true;
-            this.textResponseAPI.Name = "textResponseAPI";
-            this.textResponseAPI.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textResponseAPI.Size = new System.Drawing.Size(656, 162);
-            this.textResponseAPI.TabIndex = 1;
-            // 
             // cmdExecuta
             // 
             this.cmdExecuta.Location = new System.Drawing.Point(545, 33);
@@ -82,7 +67,7 @@
             this.cmdExecuta.TabIndex = 2;
             this.cmdExecuta.Text = "Executa";
             this.cmdExecuta.UseVisualStyleBackColor = true;
-            this.cmdExecuta.Click += new System.EventHandler(this.cmdExecuta_Click);
+            this.cmdExecuta.Click += new System.EventHandler(this.CmdExecute_Click);
             // 
             // label1
             // 
@@ -110,7 +95,7 @@
             this.cmdDeserializare.TabIndex = 5;
             this.cmdDeserializare.Text = "Deserializare";
             this.cmdDeserializare.UseVisualStyleBackColor = true;
-            this.cmdDeserializare.Click += new System.EventHandler(this.cmdDeserializare_Click);
+            this.cmdDeserializare.Click += new System.EventHandler(this.CmdDeserialize_Click);
             // 
             // cmdClearDebug
             // 
@@ -120,19 +105,7 @@
             this.cmdClearDebug.TabIndex = 6;
             this.cmdClearDebug.Text = "Clear Debug";
             this.cmdClearDebug.UseVisualStyleBackColor = true;
-            this.cmdClearDebug.Click += new System.EventHandler(this.cmdClearDebug_Click);
-            // 
-            // textDebugOuput
-            // 
-            this.textDebugOuput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textDebugOuput.Location = new System.Drawing.Point(23, 359);
-            this.textDebugOuput.Multiline = true;
-            this.textDebugOuput.Name = "textDebugOuput";
-            this.textDebugOuput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textDebugOuput.Size = new System.Drawing.Size(712, 136);
-            this.textDebugOuput.TabIndex = 7;
+            this.cmdClearDebug.Click += new System.EventHandler(this.CmdClearDebug_Click);
             // 
             // label3
             // 
@@ -150,7 +123,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(155, 21);
             this.comboBox1.TabIndex = 9;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -169,7 +142,7 @@
             this.converteste.TabIndex = 12;
             this.converteste.Text = "Convertește în:";
             this.converteste.UseVisualStyleBackColor = true;
-            this.converteste.Click += new System.EventHandler(this.conversieButton);
+            this.converteste.Click += new System.EventHandler(this.ConversionButton);
             // 
             // label5
             // 
@@ -180,14 +153,6 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "Alege monedă:";
             // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(470, 538);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(155, 21);
-            this.comboBox2.TabIndex = 14;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -197,13 +162,13 @@
             this.label6.TabIndex = 16;
             this.label6.Text = "Valoare rezultată:";
             // 
-            // sumaDeConvertit
+            // valueForConversion
             // 
-            this.sumaDeConvertit.DecimalPlaces = 6;
-            this.sumaDeConvertit.Location = new System.Drawing.Point(43, 538);
-            this.sumaDeConvertit.Name = "sumaDeConvertit";
-            this.sumaDeConvertit.Size = new System.Drawing.Size(75, 20);
-            this.sumaDeConvertit.TabIndex = 17;
+            this.valueForConversion.DecimalPlaces = 6;
+            this.valueForConversion.Location = new System.Drawing.Point(43, 538);
+            this.valueForConversion.Name = "valueForConversion";
+            this.valueForConversion.Size = new System.Drawing.Size(75, 20);
+            this.valueForConversion.TabIndex = 17;
             // 
             // valoareDupaConversie
             // 
@@ -275,25 +240,22 @@
             this.Controls.Add(this.textPassword);
             this.Controls.Add(this.textUserName);
             this.Controls.Add(this.valoareDupaConversie);
-            this.Controls.Add(this.sumaDeConvertit);
+            this.Controls.Add(this.valueForConversion);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.converteste);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textDebugOuput);
             this.Controls.Add(this.cmdClearDebug);
             this.Controls.Add(this.cmdDeserializare);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdExecuta);
-            this.Controls.Add(this.textResponseAPI);
             this.Controls.Add(this.textURI);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.sumaDeConvertit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valueForConversion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.valoareDupaConversie)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -303,21 +265,21 @@
         #endregion
 
         private System.Windows.Forms.TextBox textURI;
-        private System.Windows.Forms.TextBox textResponseAPI;
+        private static System.Windows.Forms.TextBox textResponseAPI;
         private System.Windows.Forms.Button cmdExecuta;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button cmdDeserializare;
         private System.Windows.Forms.Button cmdClearDebug;
-        private System.Windows.Forms.TextBox textDebugOuput;
+        private static System.Windows.Forms.TextBox textDebugOuput;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button converteste;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private static System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown sumaDeConvertit;
+        private System.Windows.Forms.NumericUpDown valueForConversion;
         private System.Windows.Forms.NumericUpDown valoareDupaConversie;
         private System.Windows.Forms.TextBox textUserName;
         private System.Windows.Forms.TextBox textPassword;
