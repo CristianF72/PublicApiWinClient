@@ -20,8 +20,6 @@ namespace PublicApiWinClient
     {
         public string endPoint { get; set; }
         public httpVerb httpMethod { get; set; }
-        //public string userName { get; set; }
-        //public string userPassword { get; set; }
 
         public RestClient()
         {

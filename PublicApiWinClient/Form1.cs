@@ -16,11 +16,6 @@ namespace PublicApiWinClient
     public partial class Form1 : Form
     {
         
-        //private readonly decimal _czk = (decimal)DeserializeJson(textResponseAPI.Text).rates.CZK;
-        //private readonly decimal _gbp = (decimal)DeserializeJson(textResponseAPI.Text).rates.GBP;
-        //private readonly decimal _ron = (decimal)DeserializeJson(textResponseAPI.Text).rates.RON;
-        //private readonly decimal _eur = (decimal)DeserializeJson(textResponseAPI.Text).rates.EUR;
-
         public Form1()
         {
             InitializeComponent();
@@ -44,13 +39,7 @@ namespace PublicApiWinClient
         {
             RestClient restClient = new RestClient();
             restClient.endPoint = textURI.Text;
-
-            //restClient.userName = textUserName.Text;
-            //restClient.userPassword = textPassword.Text;
-
-
-            //DebugOutput("clientul REST a fost creat");
-
+            
             string strResponse = string.Empty;
 
             strResponse = restClient.makeRequest();
