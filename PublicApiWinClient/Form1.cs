@@ -16,10 +16,10 @@ namespace PublicApiWinClient
     public partial class Form1 : Form
     {
         
-        private readonly decimal _czk = (decimal)DeserializeJson(textResponseAPI.Text).rates.CZK;
-        private readonly decimal _gbp = (decimal)DeserializeJson(textResponseAPI.Text).rates.GBP;
-        private readonly decimal _ron = (decimal)DeserializeJson(textResponseAPI.Text).rates.RON;
-        private readonly decimal _eur = (decimal)DeserializeJson(textResponseAPI.Text).rates.EUR;
+        //private readonly decimal _czk = (decimal)DeserializeJson(textResponseAPI.Text).rates.CZK;
+        //private readonly decimal _gbp = (decimal)DeserializeJson(textResponseAPI.Text).rates.GBP;
+        //private readonly decimal _ron = (decimal)DeserializeJson(textResponseAPI.Text).rates.RON;
+        //private readonly decimal _eur = (decimal)DeserializeJson(textResponseAPI.Text).rates.EUR;
 
         public Form1()
         {
@@ -49,7 +49,7 @@ namespace PublicApiWinClient
             //restClient.userPassword = textPassword.Text;
 
 
-            //debugOutput("clientul REST a fost creat");
+            //DebugOutput("clientul REST a fost creat");
 
             string strResponse = string.Empty;
 
@@ -74,7 +74,7 @@ namespace PublicApiWinClient
 
         #region JSON functions
 
-        private static dynamic DeserializeJson(string strJson)
+        private dynamic DeserializeJson(string strJson)
         {
             if (strJson == null) throw new ArgumentNullException(nameof(strJson));
             dynamic jsonCurrencyConvertor = null;
@@ -119,7 +119,7 @@ namespace PublicApiWinClient
             }
         }
 
-        private static void DebugDeserializeOutput(string strDebugText)
+        private void DebugDeserializeOutput(string strDebugText)
         {
             try
             {
@@ -145,30 +145,18 @@ namespace PublicApiWinClient
 
         public void ConversionButton(object sender, EventArgs e)
         {
-            //Assembly assembly = Assembly.LoadFrom("currencyconversion.dll");
-
-            //object currencyConversion = assembly.CreateInstance("CurrencyConversion.CurrencyConversion");
-
-            //if (currencyConversion != null)
-            //{
-                //Type type = currencyConversion.GetType();
-            //}
-
-            //BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic;
-
-           // MethodInfo methodInfo = Type.GetMethod("ConverseCurrency", bindingFlags);
-
-           // methodInfo.Invoke(currencyConversion, null);
-
-            //Console.ReadKey();
-
             string fromCurrency = comboBox1.SelectedItem.ToString();
 
             string toCurrency = comboBox2.SelectedItem.ToString();
 
+            decimal czk = (decimal)DeserializeJson(textResponseAPI.Text).rates.CZK;
+            decimal gbp = (decimal)DeserializeJson(textResponseAPI.Text).rates.GBP;
+            decimal ron = (decimal)DeserializeJson(textResponseAPI.Text).rates.RON;
+            decimal eur = (decimal)DeserializeJson(textResponseAPI.Text).rates.EUR;
+
             CurrencyConversion.CurrencyConversion currencyConversion = new CurrencyConversion.CurrencyConversion();
 
-            currencyConversion.ConverseCurrency(fromCurrency, toCurrency, valueForConversion.Value);
+            valueAfterConversion.Value = currencyConversion.ConverseCurrency(fromCurrency, toCurrency, valueForConversion.Value, czk, gbp, ron, eur);
 
         }
 

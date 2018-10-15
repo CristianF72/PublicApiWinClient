@@ -41,15 +41,17 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.valueForConversion = new System.Windows.Forms.NumericUpDown();
-            this.valoareDupaConversie = new System.Windows.Forms.NumericUpDown();
+            this.valueAfterConversion = new System.Windows.Forms.NumericUpDown();
             this.textUserName = new System.Windows.Forms.TextBox();
             this.textPassword = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.textResponseAPI = new System.Windows.Forms.TextBox();
+            this.textDebugOuput = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.valueForConversion)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.valoareDupaConversie)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valueAfterConversion)).BeginInit();
             this.SuspendLayout();
             // 
             // textURI
@@ -170,13 +172,13 @@
             this.valueForConversion.Size = new System.Drawing.Size(75, 20);
             this.valueForConversion.TabIndex = 17;
             // 
-            // valoareDupaConversie
+            // valueAfterConversion
             // 
-            this.valoareDupaConversie.DecimalPlaces = 6;
-            this.valoareDupaConversie.Location = new System.Drawing.Point(663, 538);
-            this.valoareDupaConversie.Name = "valoareDupaConversie";
-            this.valoareDupaConversie.Size = new System.Drawing.Size(75, 20);
-            this.valoareDupaConversie.TabIndex = 18;
+            this.valueAfterConversion.DecimalPlaces = 6;
+            this.valueAfterConversion.Location = new System.Drawing.Point(663, 538);
+            this.valueAfterConversion.Name = "valueAfterConversion";
+            this.valueAfterConversion.Size = new System.Drawing.Size(75, 20);
+            this.valueAfterConversion.TabIndex = 18;
             // 
             // textUserName
             // 
@@ -201,15 +203,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Auth Type";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Location = new System.Drawing.Point(313, 111);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(156, 45);
-            this.groupBox2.TabIndex = 22;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Technique";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -228,18 +221,44 @@
             this.label8.TabIndex = 24;
             this.label8.Text = "User Name:";
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(476, 539);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(155, 21);
+            this.comboBox2.TabIndex = 25;
+            // 
+            // textResponseAPI
+            // 
+            this.textResponseAPI.Location = new System.Drawing.Point(36, 190);
+            this.textResponseAPI.Multiline = true;
+            this.textResponseAPI.Name = "textResponseAPI";
+            this.textResponseAPI.Size = new System.Drawing.Size(702, 134);
+            this.textResponseAPI.TabIndex = 26;
+            // 
+            // textDebugOuput
+            // 
+            this.textDebugOuput.Location = new System.Drawing.Point(36, 365);
+            this.textDebugOuput.Multiline = true;
+            this.textDebugOuput.Name = "textDebugOuput";
+            this.textDebugOuput.Size = new System.Drawing.Size(702, 144);
+            this.textDebugOuput.TabIndex = 27;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 606);
+            this.Controls.Add(this.textDebugOuput);
+            this.Controls.Add(this.textResponseAPI);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textPassword);
             this.Controls.Add(this.textUserName);
-            this.Controls.Add(this.valoareDupaConversie);
+            this.Controls.Add(this.valueAfterConversion);
             this.Controls.Add(this.valueForConversion);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -256,7 +275,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.valueForConversion)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.valoareDupaConversie)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.valueAfterConversion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,28 +284,31 @@
         #endregion
 
         private System.Windows.Forms.TextBox textURI;
-        private static System.Windows.Forms.TextBox textResponseAPI;
+        //private static System.Windows.Forms.TextBox textResponseAPI;
         private System.Windows.Forms.Button cmdExecuta;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button cmdDeserializare;
         private System.Windows.Forms.Button cmdClearDebug;
-        private static System.Windows.Forms.TextBox textDebugOuput;
+        //private static System.Windows.Forms.TextBox textDebugOuput;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button converteste;
         private System.Windows.Forms.Label label5;
-        private static System.Windows.Forms.ComboBox comboBox2;
+        //private static System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown valueForConversion;
-        private System.Windows.Forms.NumericUpDown valoareDupaConversie;
+        private System.Windows.Forms.NumericUpDown valueAfterConversion;
         private System.Windows.Forms.TextBox textUserName;
         private System.Windows.Forms.TextBox textPassword;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        //private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox textResponseAPI;
+        private System.Windows.Forms.TextBox textDebugOuput;
     }
 }
 
