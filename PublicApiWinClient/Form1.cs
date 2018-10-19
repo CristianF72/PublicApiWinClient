@@ -132,7 +132,7 @@ namespace PublicApiWinClient
 
         }
 
-        public void ConversionButton(object sender, EventArgs e)
+        public async void ConversionButton(object sender, EventArgs e)
         {
             string fromCurrency = comboBox1.SelectedItem.ToString();
 
@@ -145,12 +145,12 @@ namespace PublicApiWinClient
 
             CurrencyConversion.CurrencyConversion currencyConversion = new CurrencyConversion.CurrencyConversion();
 
-            valueAfterConversion.Value = currencyConversion.ConverseCurrency(fromCurrency, toCurrency, valueForConversion.Value, czk, gbp, ron, eur);
+            decimal result  = await Task.Run(() => currencyConversion.ConverseCurrency(fromCurrency, toCurrency, valueForConversion.Value, czk, gbp, ron, eur));
 
+            valueAfterConversion.Value = result;
+
+            //return result;
         }
-
-
-
         
     }
 }
