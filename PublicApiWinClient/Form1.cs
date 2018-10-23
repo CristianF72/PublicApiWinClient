@@ -4,12 +4,14 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Threading;
 
 namespace PublicApiWinClient
 {
@@ -132,6 +134,8 @@ namespace PublicApiWinClient
 
         }
 
+
+        // Week 42 - #15e - Fetch data async from currency converter and update the UI without using wait and make sure you use ConfigureAwait(false)
         public async void ConversionButton(object sender, EventArgs e)
         {
             string fromCurrency = comboBox1.SelectedItem.ToString();
@@ -144,13 +148,21 @@ namespace PublicApiWinClient
             decimal eur = (decimal)DeserializeJson(textResponseAPI.Text).rates.EUR;
 
             CurrencyConversion.CurrencyConversion currencyConversion = new CurrencyConversion.CurrencyConversion();
+            var syncCtx = SynchronizationContext.Current;
+            decimal result  = await Task.Run(() => currencyConversion.ConverseCurrency(fromCurrency, toCurrency, valueForConversion.Value, czk, gbp, ron, eur)).ConfigureAwait(false);
 
-            decimal result  = await Task.Run(() => currencyConversion.ConverseCurrency(fromCurrency, toCurrency, valueForConversion.Value, czk, gbp, ron, eur));
+            //valueAfterConversion.Value = result;
 
-            valueAfterConversion.Value = result;
+            // https://stackoverflow.com/questions/24671883/difference-between-synchronization-context-and-dispatcher
+            syncCtx.Post((x) =>
+            {
+                Debug.WriteLine($"UI Thread, inside of the .Post() method, no: {Thread.CurrentThread.ManagedThreadId}");
+                valueAfterConversion.Value = result;
+            }, null);
+            Debug.WriteLine($" Non UI thread no: {Thread.CurrentThread.ManagedThreadId}");
 
             //return result;
         }
-        
+
     }
 }
